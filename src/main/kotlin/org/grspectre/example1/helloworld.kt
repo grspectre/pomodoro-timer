@@ -102,7 +102,7 @@ public open class HelloWorld(): Application() {
                 if (btn.getText() == "Start") {
                     btn.setText("Stop");
                     timer = Timer();
-                    var obj: TickTimer = TickTimer(1*60, 30, indicator, btn);
+                    var obj: TickTimer = TickTimer(25*60, 5*60, indicator, btn);
                     timer?.schedule(obj, 0, 1000);
                 } else {
                     btn.setText("Start");
