@@ -1,0 +1,31 @@
+buildscript {
+  repositories {
+    mavenCentral()
+    maven {
+      url 'http://oss.sonatype.org/content/repositories/snapshots'
+    }
+  }
+  dependencies {
+    classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:0.12.613'
+  }
+}
+
+apply plugin: "kotlin" // or apply plugin: "kotlin2js" if targeting JavaScript
+apply plugin: "application"
+
+mainClassName = 'org.grspectre.example1.Example1Package'
+
+repositories {
+  mavenCentral()
+  maven {
+    url 'http://oss.sonatype.org/content/repositories/snapshots'
+  }
+}
+
+dependencies {
+  compile 'org.jetbrains.kotlin:kotlin-stdlib:0.12.613'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.5'
+}
