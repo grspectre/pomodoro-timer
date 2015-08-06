@@ -17,6 +17,9 @@ import javafx.stage.WindowEvent;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * Main application class
+ */
 public open class HelloWorld(): Application() {
     override fun start(primaryStage: Stage?) {
         primaryStage?.setTitle("Pomodoro");
@@ -25,6 +28,13 @@ public open class HelloWorld(): Application() {
         var timer: Timer? = null;
         var indicator: ProgressIndicator? = ProgressIndicator();
 
+        /**
+         * Runnable class who operated with JavaFX controls
+         * @param pr Percent of progress
+         * @param type Type of visible progress indicator
+         * @param ind Instance of ProgressIndicator
+         * @param btn Instance of Button
+         */
         public open class TickTimerRunnable(pr: Double, type: String, ind: ProgressIndicator?, btn: Button?): Runnable {
             public var pr: Double = 0.0;
             public var ind: ProgressIndicator? = null;
@@ -58,6 +68,13 @@ public open class HelloWorld(): Application() {
             }
         }
 
+        /**
+         * TimerTask class for Timer. Not the most elegant implementation
+         * @param timeInSecondsWork Duration of period of work time
+         * @param timeInSecondsRest Duration of period of rest time
+         * @param ind Instance of ProgressIndicator
+         * @param btn Instance of Button
+         */
         public open class TickTimer(timeInSecondsWork: Int, timeInSecondsRest: Int, ind: ProgressIndicator?, btn: Button?): TimerTask() {
             public var timeInSecondsWork: Int = 0;
             public var timeInSecondsRest: Int = 0;
@@ -102,6 +119,7 @@ public open class HelloWorld(): Application() {
                 if (btn.getText() == "Start") {
                     btn.setText("Stop");
                     timer = Timer();
+                    // TODO: Move to configuration file
                     var obj: TickTimer = TickTimer(25*60, 5*60, indicator, btn);
                     timer?.schedule(obj, 0, 1000);
                 } else {
@@ -125,6 +143,7 @@ public open class HelloWorld(): Application() {
         var root : StackPane = StackPane();
         root.getChildren().add(indicator);
         root.getChildren().add(btn);
+        // TODO: Move to configuration file
         var scene: Scene = Scene(root, 250.0, 250.0);
         primaryStage?.setScene(scene);
         primaryStage?.setOnCloseRequest(onClose);
